@@ -13,9 +13,6 @@ on:
       milestone_title:
         description: 'Milestone title (e.g. 6.1)'
         required: true
-      future_milestone_title:
-        description: 'Next milestone title (used to update dev version.txt on master)'
-        required: true
 
 jobs:
   create-changelog-PR:
@@ -44,8 +41,8 @@ jobs:
     - name: Update version.txt
       run: |
         cd ${{ github.event.repository.name }}
-        echo "${{ github.event.inputs.future_milestone_title }}" > shimming-toolbox/shimmingtoolbox/version.txt
-        echo "${{ github.event.inputs.future_milestone_title }}" > fsleyes-plugin-shimming-toolbox/fsleyes-plugin-shimming-toolbox/version.txt
+        echo "${{ github.event.inputs.milestone_title }}" > shimming-toolbox/shimmingtoolbox/version.txt
+        echo "${{ github.event.inputs.milestone_title }}" > fsleyes-plugin-shimming-toolbox/fsleyes-plugin-shimming-toolbox/version.txt
     - name: Create pull request for updated changelog and version.txt
       uses: peter-evans/create-pull-request@v6
       with:
